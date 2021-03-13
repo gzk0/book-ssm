@@ -54,53 +54,53 @@
 
 ①登录界面
 
-![login-student](image\login-student.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/login-student.png)
 
 ②首页界面
 
-![login-student](image\home.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/home.png)
 
 ③借阅记录
 
-![login-student](image\borrow-record.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/borrow-record.png)
 
 ④个人信息界面
 
-![login-student](image\userinfo.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/userinfo.png)
 
 ###### 2、管理员
 
 登录界面
 
-![login-student](image\login-admin.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/login-admin.png)
 
 首页界面
 
-![login-student](image\home-admin.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/home-admin.png)
 
 图书管理
 
-![login-student](image\allbook.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/allbook.png)
 
-![login-student](image\upbook.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/upbook.png)
 
-![login-student](image\downbook.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/downbook.png)
 
-![login-student](image\searchbook.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/searchbook.pngg)
 
 借阅管理
 
-![login-student](image\borrow-record-admin.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/borrow-record-admin.png)
 
 读者管理
 
-![login-student](image\alluser.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/alluser.png)
 
-![login-student](image\searchuser.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/searchuser.png)
 
 系统管理
 
-![login-student](image\alladmin.png)
+![login-student](image\https://github.com/gzk0/book-ssm/blob/main/image/alladmin.png)
 
-![login-student](image\addadmin.png)
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/addadmin.png)
 
