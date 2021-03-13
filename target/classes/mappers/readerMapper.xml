@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bms.dao.ReaderDao">
+    <sql id="baseFileds">
+        r_id,r_card,r_nick,r_privilege,r_sex,r_photo,r_regist_time,r_password
+    </sql>
+
+    <sql id="baseFileds2">
+        r_card,r_nick,r_privilege,r_sex,r_regist_time,r_password
+    </sql>
+
+
+    <select id="getReader" parameterType="com.bms.pojo.Reader" resultType="com.bms.pojo.Reader">
+        select
+        <include refid="baseFileds"/>
+        from reader
+        <where>
+            <if test="rId != null">
+                r_id=#{rId}
+            </if>
+            <if test="rCard != null and rCard!=''">
+                and r_card=#{rCard}
+            </if>
+            <if test="rNick != null and rNick!=''">
+                and r_nick=#{rNick}
+            </if>
+            <if test="rPrivilege != null">
+                and r_privilege=#{rPrivilege}
+            </if>
+            <if test="rSex != null">
+                and r_sex=#{rSex}
+            </if>
+            <if test="rPassword != null and rPassword!=''">
+                and r_password=#{rPassword}
+            </if>
+        </where>
+        order by r_privilege
+    </select>
+
+    <insert id="addReader" parameterType="com.bms.pojo.Reader">
+        insert into reader(<include refid="baseFileds2"></include>)
+        value(
+            #{rCard},#{rNick},#{rPrivilege},#{rSex},#{rRegistTime},#{rPassword}
+        )
+    </insert>
+
+    <select id="getReaders" parameterType="com.bms.pojo.Reader" resultType="com.bms.pojo.Reader">
+        select
+        <include refid="baseFileds"/>
+        from reader
+        <where>
+            <if test="rNick != null and rNick!=''">
+                r_nick=#{rNick}
+            </if>
+            <if test="rPrivilege != null">
+                and r_privilege=#{rPrivilege}
+            </if>
+            <if test="rSex != null">
+                and r_sex=#{rSex}
+            </if>
+        </where>
+    </select>
+
+
+
+    <select id="getLikeReaders" parameterType="com.bms.pojo.Reader" resultType="com.bms.pojo.Reader">
+        select
+        <include refid="baseFileds"/>
+        from reader
+        <where>
+            <if test="rCard != null and rCard!=''">
+                and r_card=#{rCard}
+            </if>
+            <if test="rNick != null and rNick!=''">
+                r_nick like #{rNick}
+            </if>
+            <if test="rPrivilege != null">
+                and r_privilege=#{rPrivilege}
+            </if>
+            <if test="rSex != null">
+                and r_sex=#{rSex}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateReader" parameterType="com.bms.pojo.Reader" >
+       update reader
+       <set>
+           <if test="rNick != null and rNick!=''"> r_nick=#{rNick},</if>
+           <if test="rSex != null"> r_sex=#{rSex},</if>
+           <if test="rPrivilege != null"> r_privilege=#{rPrivilege},</if>
+           <if test="rPhoto != null"> r_photo=#{rPhoto},</if>
+           <if test="rPassword != null and rPassword!=''"> r_password=#{rPassword}</if>
+       </set>
+       where r_id=#{rId}
+    </update>
+
+
+    <delete id="deleteReader" >
+        delete from reader where r_id = #{rId}
+    </delete>
+
+</mapper>

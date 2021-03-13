@@ -1,0 +1,77 @@
+#brandIoc{
+    width: 40px;
+    margin-top: -10px;
+}
+tr{
+    vertical-align: middle;
+    margin: auto;
+
+}
+#bookinfotable th{
+    width: 20%;
+    font-size: 20px;
+    color: #0f0f0f;
+    display: table-cell;
+    font-family: 楷体;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#bookinfotable td{
+    color: #8c8c8c;
+    font-family: 楷体;
+    font-size: 16px;
+}
+
+#divBookOption th{
+    font-size: 20px;
+    color: #0f0f0f;
+    display: table-cell;
+    font-family: 楷体;
+    text-align: center;
+    vertical-align: middle;
+}
+#divBookOption td{
+    font-size: 20px;
+    color: #265a88;
+    display: table-cell;
+    font-family: 楷体;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#headBook{
+
+    text-align: center;
+    font-family: 楷体;
+    font-size: 30px;
+    color: #8c8c8c;
+    margin-bottom: 10px;
+}
+
+#toindexImg img{
+    margin-top: 20px;
+    width: 30px;
+    float: right;
+}
+
+#span_bookname{
+    color: #843534;
+
+}
+#borrowtable th{
+    font-size: 20px;
+    color: #0f0f0f;
+    display: table-cell;
+    font-family: 楷体;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#borrowtable td{
+    color: #0f0f0f;
+    font-family: 楷体;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle;
+}

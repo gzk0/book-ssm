@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--        borrow.id,reader.r_id,b_id,r_card,r_nick,ISBN,b_name,b_author,b_publisher,b_path,start_time,end_time,state-->
+<mapper namespace="com.bms.dao.BorrowDao">
+    <resultMap id="baseResultMap" type="com.bms.pojo.Borrow">
+        <id column="id" property="id"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="state" property="state"/>
+        <result column="return_time" property="returnTime"/>
+        <association property="reader" javaType="com.bms.pojo.Reader">
+            <id column="reader.r_id" property="rId"/>
+            <result column="r_card" property="rCard"/>
+            <result column="r_nick" property="rNick"/>
+        </association>
+
+        <association property="book" javaType="com.bms.pojo.Book">
+            <id column="b_id" property="id"/>
+            <result column="ISBN" property="ISBN"/>
+            <result column="b_name" property="bName"/>
+            <result column="b_author" property="bAuthor"/>
+            <result column="b_publisher" property="bPublisher" />
+            <result column="b_path" property="bPath"/>
+        </association>
+
+    </resultMap>
+
+
+    <resultMap id="simpleResultMap" type="com.bms.pojo.Borrow">
+        <id column="id" property="id"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="state" property="state"/>
+        <association property="reader" javaType="com.bms.pojo.Reader">
+            <id column="r_id" property="rId"/>
+        </association>
+        <association property="book" javaType="com.bms.pojo.Book">
+            <id column="b_id" property="id"/>
+        </association>
+    </resultMap>
+
+    <sql id="reader_book_borrow">
+        borrow.id,reader.r_id,b_id,r_card,r_nick,ISBN,b_name,b_author,b_publisher,b_path,start_time,end_time,state,return_time
+    </sql>
+
+    <sql id="baseFiled">
+        id,r_id,b_id,start_time,end_time,state,return_time
+    </sql>
+    <sql id="baseFiled2">
+        r_id,b_id,start_time,end_time
+    </sql>
+    <insert id="addBorrow" parameterType="com.bms.pojo.Borrow">
+        insert into borrow(<include refid="baseFiled2"></include>)
+        value (#{reader.rId},#{book.id},#{startTime},#{endTime})
+    </insert>
+
+    <select id="getBorrows" resultMap="baseResultMap" parameterType="com.bms.pojo.Borrow">
+        select <include refid="reader_book_borrow"/> FROM reader,book,borrow
+        <where>
+            <if test="reader != null and reader.rId !=null">reader.r_id=#{reader.rId}</if>
+            <if test="state != null">and state=#{state}</if>
+            <if test="book!=null and book.id!=null">and borrow.b_id=#{book.id}</if>
+            AND reader.r_id=borrow.r_id AND borrow.b_id=book.id order by state,return_time;
+        </where>
+
+    </select>
+
+    <select id="getOverdueBorrows" resultMap="baseResultMap" parameterType="com.bms.pojo.Borrow">
+        select <include refid="reader_book_borrow"/> FROM reader,book,borrow
+        <where>
+            <if test="reader != null and reader.rId !=null">reader.r_id=#{reader.rId}</if>
+            <if test="state!=null">and state=#{state}</if>
+            and (return_time > end_time
+            or (end_time <![CDATA[ <= ]]>#{endTime} and state=0 ))
+            AND reader.r_id=borrow.r_id AND borrow.b_id=book.id order by state,end_time;
+        </where>
+
+    </select>
+
+    <update id="updateBorrow" parameterType="com.bms.pojo.Borrow">
+        update borrow
+        <set>
+            <if test="state!= null">
+                state = #{state}
+            </if>
+            <if test="returnTime!= null">
+                ,return_time = #{returnTime}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <select id="getBorrow" parameterType="java.lang.Integer" resultMap="simpleResultMap">
+       SELECT borrow.`id` ,borrow.`r_id`,borrow.`b_id`,borrow.`start_time`,borrow.`start_time`,borrow.`state`
+        from book,borrow where borrow.id=#{borrowId} and b_id=book.id
+    </select>
+
+</mapper>

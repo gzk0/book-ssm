@@ -1,0 +1,44 @@
+body{
+    background-color: #e7e7e7;
+}
+.navbar-brand {
+    padding-top: 10px;
+}
+
+.navbar-brand img {
+    width: 30px;
+    height: 30px;
+}
+
+
+.icon-bar{
+    background-color: #adadad;
+}
+
+.footer_div {
+    background-color: #f8f8f8;
+    padding: 10px 20px;
+}
+
+.footer_div img {
+    width: auto;
+    height: 150px;
+}
+
+#slogan{
+    width: auto;
+    height: 100px;
+    margin-top: 25px;
+}
+
+.user_photo{
+    width: 50px;
+    height: 50px;
+    margin-top: 0px;
+}
+#curor{
+    position: fixed;
+    right: 5px;
+    top: 50%;
+    width: 100px;
+}

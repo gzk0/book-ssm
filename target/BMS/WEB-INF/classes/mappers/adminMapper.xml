@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bms.dao.AdminDao">
+    <sql id="baseFileds">
+        a_id,a_email,a_password,a_nick,a_privilege,a_photo,a_sex,a_regist_time,a_creed,a_state
+    </sql>
+    <sql id="baseFileds2">
+        a_email,a_password,a_nick,a_privilege,a_photo,a_sex,a_regist_time,a_creed,a_state
+    </sql>
+    <sql id="baseFileds3">
+        a_email,a_password,a_nick,a_privilege,a_sex,a_regist_time
+    </sql>
+    <sql id="baseCondition">
+        <where>
+            <if test="aId != null">
+                AND a_id=#{aId}
+            </if>
+            <if test="aEmail != null">
+                AND a_email=#{aEmail}
+            </if>
+            <if test="aPassword != null">
+                AND a_password=#{aPassword}
+            </if>
+            <if test="aNick != null">
+                AND a_nick=#{aNick}
+            </if>
+            <if test="aPrivilege != null">
+                AND a_privilege=#{aPrivilege}
+            </if>
+            <if test="aSex != null">
+                AND a_sex=#{aSex}
+            </if>
+            <if test="aState != null">
+                AND a_state=#{aState}
+            </if>
+        </where>
+    </sql>
+
+    <select id="getAdmin" resultType="com.bms.pojo.Admin" parameterType="com.bms.pojo.Admin">
+        select
+        <include refid="baseFileds"/>
+        from admin
+        <include refid="baseCondition"/>
+
+    </select>
+
+
+    <select id="getAllAdmins" resultType="com.bms.pojo.Admin" parameterType="com.bms.pojo.Admin">
+        select
+        <include refid="baseFileds"/>
+        from admin
+        <include refid="baseCondition"/>
+        order by a_privilege,a_regist_time desc
+    </select>
+
+
+    <insert id="addAdmin" parameterType="com.bms.pojo.Admin">
+        insert into admin(
+            <include refid="baseFileds3"></include>
+        ) value(#{aEmail},#{aPassword},#{aNick},#{aPrivilege},#{aSex},#{aRegistTime})
+    </insert>
+
+
+    <update id="updateAdmin" parameterType="com.bms.pojo.Admin">
+        update admin
+        <set>
+            <if test="aNick != null">a_nick=#{aNick},</if>
+            <if test="aPhoto != null">a_photo=#{aPhoto},</if>
+            <if test="aSex != null">a_sex=#{aSex},</if>
+            <if test="aCreed != null">a_creed=#{aCreed},</if>
+            <if test="aPassword != null">a_password=#{aPassword},</if>
+            <if test="aState != null">a_state=#{aState}</if>
+        </set>
+        where a_id=#{aId}
+    </update>
+    
+    <delete id="deleteAdmin">
+        delete from admin where a_id = #{adminId}
+    </delete>
+</mapper>

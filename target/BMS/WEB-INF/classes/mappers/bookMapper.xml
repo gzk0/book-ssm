@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bms.dao.BookDao">
+    <sql id="baseFiled">
+        id,ISBN,b_name,b_price,b_author,b_publisher,b_num,b_pub_time,b_join_time,b_path,b_introduce,b_lend_num,b_state
+    </sql>
+
+    <sql id="baseFiled2">
+        ISBN,b_name,b_price,b_author,b_publisher,b_num,b_pub_time,b_join_time,b_path,b_introduce,b_lend_num,b_state
+    </sql>
+
+
+    <select id="getBook" parameterType="com.bms.pojo.Book" resultType="com.bms.pojo.Book">
+        select
+        <include refid="baseFiled"/>
+        from book
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="ISBN != null">
+                AND ISBN = #{ISBN}
+            </if>
+            <if test="bName != null">
+                AND b_name = #{bName}
+            </if>
+            <if test="bPrice != null">
+                AND b_price = #{bPrice}
+            </if>
+            <if test="bAuthor != null">
+                AND b_author = #{bAuthor}
+            </if>
+            <if test="bPublisher != null">
+                AND b_publisher = #{bPublisher}
+            </if>
+            <if test="bNum != null">
+                AND b_num = #{bNum}
+            </if>
+            <if test="bPubTime != null">
+                AND b_pub_time = #{bPubTime}
+            </if>
+            <if test="bJoinTime != null">
+                AND b_join_time = #{bJoinTime}
+            </if>
+            <if test="bPath != null">
+                AND b_path = #{bPath}
+            </if>
+            <if test="bIntroduce != null">
+                AND b_introduce = #{bIntroduce}
+            </if>
+            <if test="bState != null">
+                AND b_state = #{bState}
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="addBook" parameterType="com.bms.pojo.Book">
+        insert into book(
+        <include refid="baseFiled2"/>
+        ) value(
+        #{ISBN},#{bName},#{bPrice}, #{bAuthor},#{bPublisher},#{bNum},#{bPubTime},
+        #{bJoinTime},#{bPath},#{bIntroduce},#{bLendNum},#{bState}
+        )
+    </insert>
+
+    <select id="getBooks" parameterType="com.bms.pojo.Book" resultType="com.bms.pojo.Book">
+        select
+        <include refid="baseFiled"/>
+        from book
+        <where>
+            <if test="bState != null">b_state=#{bState}</if>
+        </where>
+    </select>
+
+
+    <update id="updateBook" parameterType="com.bms.pojo.Book">
+        update book
+        <set>
+            <if test="bName != null">b_name=#{bName} ,</if>
+            <if test="bPrice != null">b_price=#{bPrice} ,</if>
+            <if test="bAuthor != null">b_author=#{bAuthor} ,</if>
+            <if test="bPublisher != null">b_publisher=#{bPublisher} ,</if>
+            <if test="bNum != null">b_num=#{bNum} ,</if>
+            <if test="bPubTime != null">b_pub_time=#{bPubTime} ,</if>
+            <if test="bIntroduce != null">b_introduce=#{bIntroduce} ,</if>
+            <if test="bLendNum != null">b_lend_num=#{bLendNum} ,</if>
+            <if test="bPath != null">b_path=#{bPath},</if>
+            <if test="bState != null">b_state=#{bState}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <select id="getLikeBooks" parameterType="java.lang.String" resultType="com.bms.pojo.Book">
+        select
+        <include refid="baseFiled"/>
+        from book
+        where b_state=0 and ( b_name like #{condition} or b_introduce like #{condition} or b_author like #{condition} )
+    </select>
+
+    <delete id="deleteBook">
+        delete from book  where id = #{bookId}
+    </delete>
+
+
+
+</mapper>
