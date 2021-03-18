@@ -58,6 +58,8 @@
 ②首页界面
 
 ![login-student](https://github.com/gzk0/book-ssm/blob/main/image/home.png)
+③图书详情页
+![login-student](https://github.com/gzk0/book-ssm/blob/main/image/bookinfo.png)
 
 ③借阅记录
 
